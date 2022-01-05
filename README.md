@@ -1,0 +1,1 @@
+# A simple project made to learn how to use Firebase
