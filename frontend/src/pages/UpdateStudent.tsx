@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import { database } from "../services/firebase";
-import { collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 
 import '../styles/update-students.css'
+import { useNavigate } from "react-router-dom";
 
 function UpdateStudent() {
   interface IStudent {
@@ -16,6 +17,7 @@ function UpdateStudent() {
 
   const [students, setStudents] = useState<IStudent[]>([]);
   const studentsCollectionRef = collection(database, "students");
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchData() {
@@ -38,13 +40,7 @@ function UpdateStudent() {
   }, []);
 
   const updateStudent = async (id: string) => {
-    const studentDoc = doc(database, "users", id)
-      
-    const newInfo = {
-
-    }
-
-    await updateDoc(studentDoc, newInfo)
+    navigate("/students/update/"+id)
   }
 
   return (

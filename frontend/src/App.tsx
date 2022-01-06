@@ -5,10 +5,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import SeeStudents from './pages/SeeStudents'
 import Home from './pages/Home'
 import CreateStudent from './pages/CreateStudent'
-
-import './styles/global.css'
 import DeleteStudent from './pages/DeleteStudent';
 import UpdateStudent from './pages/UpdateStudent';
+import UpdateSpecificStudent from './pages/UpdateSpecificStudent'
+
+import './styles/global.css'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/students" element={< SeeStudents />} />
           <Route path="/students/create" element={< CreateStudent />} />
           <Route path="/students/update/" element={< UpdateStudent />} />
+          <Route path="/students/update/:id" element={< UpdateSpecificStudent />} />
           <Route path="/students/delete/" element={< DeleteStudent />} />
         </Routes>
       </BrowserRouter>

@@ -6,7 +6,12 @@
   height: 100vh;
 
   table {
+    display: block;
     border-collapse: collapse;
+    max-width: 80vw;
+    border-radius: 4px;
+    overflow-x: auto;
+    max-height: 300px;
 
     td,
     th {
@@ -27,4 +32,13 @@
     margin-top: 3rem;
     margin-bottom: 4rem;
   }
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
 }

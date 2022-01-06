@@ -1,12 +1,20 @@
-import { addDoc, collection } from "firebase/firestore";
-import React, { useState } from "react";
+import {
+  updateDoc,
+  collection,
+  doc,
+  addDoc,
+  getDocs,
+  getDoc,
+} from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { database } from "../services/firebase";
+
+import "../styles/update-specific-student.css";
 
 import toast, { Toaster } from "react-hot-toast";
 
-import "../styles/create-student.css";
-
-function CreateStudent() {
+function UpdateSpecificStudent() {
   interface IStudent {
     name: string;
     email: string;
@@ -19,19 +27,43 @@ function CreateStudent() {
   const [room, setRoom] = useState(0);
   const [teacher, setTeacher] = useState("");
 
-  const studentsCollectionRef = collection(database, "students");
+  const { id }: any = useParams();
 
-  const handleCreate = async () => {
-    const newStudent: IStudent = {
+  useEffect(() => {
+    const fetchData = async () => {
+      const studentDoc = doc(database, "students", id);
+
+      const studentInfo = await getDoc(studentDoc);
+
+      setName(studentInfo.data()?.name);
+      setEmail(studentInfo.data()?.email);
+      setRoom(studentInfo.data()?.room);
+      setTeacher(studentInfo.data()?.teacher);
+    };
+
+    fetchData();
+  }, []);
+
+  const handleUpdate = async () => {
+    if (name.length === 0 || email.length === 0 || teacher.length === 0) {
+      toast.error("Fields can't be empty", {
+        style: {
+          fontSize: "clamp(1rem, 2.5vw, 1.8rem)",
+        },
+      });
+      return;
+    }
+
+    const studentDoc = doc(database, "students", id);
+
+    await updateDoc(studentDoc, {
       name,
       email,
       room,
       teacher,
-    };
+    });
 
-    await addDoc(studentsCollectionRef, newStudent);
-
-    toast.success("Student created successfully", {
+    toast.success("Student updated successfully", {
       style: {
         fontSize: "clamp(1rem, 2.5vw, 1.8rem)",
       },
@@ -39,10 +71,10 @@ function CreateStudent() {
   };
 
   return (
-    <div className="create-student">
+    <div className="update-specific-student">
       <Toaster />
 
-      <h1>Add new student</h1>
+      <h1>Update student</h1>
 
       <div>
         <label htmlFor="name">
@@ -92,9 +124,9 @@ function CreateStudent() {
           />
         </label>
       </div>
-      <button onClick={handleCreate}>Create</button>
+      <button onClick={handleUpdate}>Update</button>
     </div>
   );
 }
 
-export default CreateStudent;
+export default UpdateSpecificStudent;

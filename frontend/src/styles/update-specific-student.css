@@ -1,0 +1,49 @@
+.update-specific-student {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+.update-specific-student h1 {
+  text-align: center;
+  font-size: clamp(2rem, 2.5vw, 3.5rem);
+  font-weight: 700;
+  color: #333;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
+.update-specific-student label {
+  font-size: clamp(1rem, 2.5vw, 1.8rem);
+}
+.update-specific-student input {
+  border: 1px solid #333;
+  border-radius: 4px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  width: 60vw;
+  padding: 1rem;
+  font-size: clamp(1rem, 2.5vw, 1.8rem);
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+.update-specific-student button {
+  color: #fff;
+  background: #106de7;
+  border: 0;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-top: 2.5rem;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 1.8rem;
+  display: block;
+  width: 60vw;
+  margin-bottom: 2rem;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.update-specific-student button:hover {
+  filter: brightness(1.2);
+}
+
+/*# sourceMappingURL=update-specific-student.css.map */

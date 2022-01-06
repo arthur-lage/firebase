@@ -4,6 +4,8 @@ import { database } from "../services/firebase";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 
 import "../styles/delete-student.css";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 function DeleteStudent() {
   interface IStudent {
@@ -16,6 +18,8 @@ function DeleteStudent() {
 
   const [students, setStudents] = useState<IStudent[]>([]);
   const studentsCollectionRef = collection(database, "students");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -38,13 +42,21 @@ function DeleteStudent() {
   }, []);
 
   const deleteStudent = async (id: string) => {
-    const studentDoc = doc(database, "users", id);
+    const studentDoc = doc(database, "students", id);
 
     await deleteDoc(studentDoc);
+
+    toast.success("Student deleted successfully", {
+      style: { fontSize: "clamp(1rem, 2.5vw, 1.8rem)" },
+    });
+
+    navigate(0);
   };
 
   return (
     <div className="delete-students">
+      <Toaster />
+
       <h1>Delete</h1>
       {students.length > 0 ? (
         <div className="students-wrapper">

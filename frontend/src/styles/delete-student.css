@@ -6,7 +6,12 @@
   height: 100vh;
 }
 .delete-students table {
+  display: block;
   border-collapse: collapse;
+  max-width: 80vw;
+  border-radius: 4px;
+  overflow-x: auto;
+  max-height: 300px;
 }
 .delete-students table td,
 .delete-students table th {
